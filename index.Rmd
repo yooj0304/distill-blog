@@ -1,0 +1,5 @@
+---
+title: "Seungjoon Yoo"
+site: distill::distill_website
+listing: posts
+---

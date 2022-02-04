@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Seungjoon Yoo" />
+
+
+<title>Homework 2</title>
+
+<!--radix_placeholder_navigation_in_header-->
+<meta name="distill:offset" content=""/>
+
+<script type="application/javascript">
+
+  window.headroom_prevent_pin = false;
+
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+
+    // initialize headroom for banner
+    var header = $('header').get(0);
+    var headerHeight = header.offsetHeight;
+    var headroom = new Headroom(header, {
+      tolerance: 5,
+      onPin : function() {
+        if (window.headroom_prevent_pin) {
+          window.headroom_prevent_pin = false;
+          headroom.unpin();
+        }
+      }
+    });
+    headroom.init();
+    if(window.location.hash)
+      headroom.unpin();
+    $(header).addClass('headroom--transition');
+
+    // offset scroll location for banner on hash change
+    // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
+    window.addEventListener("hashchange", function(event) {
+      window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
+    });
+
+    // responsive menu
+    $('.distill-site-header').each(function(i, val) {
+      var topnav = $(this);
+      var toggle = topnav.find('.nav-toggle');
+      toggle.on('click', function() {
+        topnav.toggleClass('responsive');
+      });
+    });
+
+    // nav dropdowns
+    $('.nav-dropbtn').click(function(e) {
+      $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
+      $(this).parent().siblings('.nav-dropdown')
+         .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $("body").click(function(e){
+      $('.nav-dropdown-content').removeClass('nav-dropdown-active');
+    });
+    $(".nav-dropdown").click(function(e){
+      e.stopPropagation();
+    });
+  });
+</script>
+
+<style type="text/css">
+
+/* Theme (user-documented overrideables for nav appearance) */
+
+.distill-site-nav {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: #0F2E3D;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.distill-site-nav a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.distill-site-nav a:hover {
+  color: white;
+}
+
+@media print {
+  .distill-site-nav {
+    display: none;
+  }
+}
+
+.distill-site-header {
+
+}
+
+.distill-site-footer {
+
+}
+
+
+/* Site Header */
+
+.distill-site-header {
+  width: 100%;
+  box-sizing: border-box;
+  z-index: 3;
+}
+
+.distill-site-header .nav-left {
+  display: inline-block;
+  margin-left: 8px;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header .nav-left {
+    margin-left: 0;
+  }
+}
+
+
+.distill-site-header .nav-right {
+  float: right;
+  margin-right: 8px;
+}
+
+.distill-site-header a,
+.distill-site-header .title {
+  display: inline-block;
+  text-align: center;
+  padding: 14px 10px 14px 10px;
+}
+
+.distill-site-header .title {
+  font-size: 18px;
+  min-width: 150px;
+}
+
+.distill-site-header .logo {
+  padding: 0;
+}
+
+.distill-site-header .logo img {
+  display: none;
+  max-height: 20px;
+  width: auto;
+  margin-bottom: -4px;
+}
+
+.distill-site-header .nav-image img {
+  max-height: 18px;
+  width: auto;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+
+
+@media screen and (min-width: 1000px) {
+  .distill-site-header .logo img {
+    display: inline-block;
+  }
+  .distill-site-header .nav-left {
+    margin-left: 20px;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 20px;
+  }
+  .distill-site-header .title {
+    padding-left: 12px;
+  }
+}
+
+
+.distill-site-header .nav-toggle {
+  display: none;
+}
+
+.nav-dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.nav-dropdown .nav-dropbtn {
+  border: none;
+  outline: none;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 16px 10px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+  margin-top: 1px;
+  z-index: 2;
+}
+
+.nav-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 4px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
+  z-index: 1;
+  margin-top: 2px;
+  white-space: nowrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.nav-dropdown-content hr {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-dropdown-active {
+  display: block;
+}
+
+.nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
+  color: black;
+  padding: 6px 24px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.nav-dropdown-content .nav-dropdown-header {
+  display: block;
+  padding: 5px 24px;
+  padding-bottom: 0;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #999999;
+  white-space: nowrap;
+}
+
+.nav-dropdown:hover .nav-dropbtn {
+  color: white;
+}
+
+.nav-dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.nav-right .nav-dropdown-content {
+  margin-left: -45%;
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
+  .distill-site-header a.nav-toggle {
+    float: right;
+    display: block;
+  }
+  .distill-site-header .title {
+    margin-left: 0;
+  }
+  .distill-site-header .nav-right {
+    margin-right: 0;
+  }
+  .distill-site-header {
+    overflow: hidden;
+  }
+  .nav-right .nav-dropdown-content {
+    margin-left: 0;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-header.responsive {position: relative; min-height: 500px; }
+  .distill-site-header.responsive a.nav-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .distill-site-header.responsive a,
+  .distill-site-header.responsive .nav-dropdown {
+    display: block;
+    text-align: left;
+  }
+  .distill-site-header.responsive .nav-left,
+  .distill-site-header.responsive .nav-right {
+    width: 100%;
+  }
+  .distill-site-header.responsive .nav-dropdown {float: none;}
+  .distill-site-header.responsive .nav-dropdown-content {position: relative;}
+  .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+/* Site Footer */
+
+.distill-site-footer {
+  width: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-top: 30px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+/* Headroom */
+
+d-title {
+  padding-top: 6rem;
+}
+
+@media print {
+  d-title {
+    padding-top: 4rem;
+  }
+}
+
+.headroom {
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.headroom--transition {
+  transition: all .4s ease-in-out;
+}
+
+.headroom--unpinned {
+  top: -100px;
+}
+
+.headroom--pinned {
+  top: 0;
+}
+
+/* adjust viewport for navbar height */
+/* helps vertically center bootstrap (non-distill) content */
+.min-vh-100 {
+  min-height: calc(100vh - 100px) !important;
+}
+
+</style>
+
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
+<script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
+<script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
+<script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
+
+<script type="application/javascript">
+
+function getMeta(metaName) {
+  var metas = document.getElementsByTagName('meta');
+  for (let i = 0; i < metas.length; i++) {
+    if (metas[i].getAttribute('name') === metaName) {
+      return metas[i].getAttribute('content');
+    }
+  }
+  return '';
+}
+
+function offsetURL(url) {
+  var offset = getMeta('distill:offset');
+  return offset ? offset + '/' + url : url;
+}
+
+function createFuseIndex() {
+
+  // create fuse index
+  var options = {
+    keys: [
+      { name: 'title', weight: 20 },
+      { name: 'categories', weight: 15 },
+      { name: 'description', weight: 10 },
+      { name: 'contents', weight: 5 },
+    ],
+    ignoreLocation: true,
+    threshold: 0
+  };
+  var fuse = new window.Fuse([], options);
+
+  // fetch the main search.json
+  return fetch(offsetURL('search.json'))
+    .then(function(response) {
+      if (response.status == 200) {
+        return response.json().then(function(json) {
+          // index main articles
+          json.articles.forEach(function(article) {
+            fuse.add(article);
+          });
+          // download collections and index their articles
+          return Promise.all(json.collections.map(function(collection) {
+            return fetch(offsetURL(collection)).then(function(response) {
+              if (response.status === 200) {
+                return response.json().then(function(articles) {
+                  articles.forEach(function(article) {
+                    fuse.add(article);
+                  });
+                })
+              } else {
+                return Promise.reject(
+                  new Error('Unexpected status from search index request: ' +
+                            response.status)
+                );
+              }
+            });
+          })).then(function() {
+            return fuse;
+          });
+        });
+
+      } else {
+        return Promise.reject(
+          new Error('Unexpected status from search index request: ' +
+                      response.status)
+        );
+      }
+    });
+}
+
+window.document.addEventListener("DOMContentLoaded", function (event) {
+
+  // get search element (bail if we don't have one)
+  var searchEl = window.document.getElementById('distill-search');
+  if (!searchEl)
+    return;
+
+  createFuseIndex()
+    .then(function(fuse) {
+
+      // make search box visible
+      searchEl.classList.remove('hidden');
+
+      // initialize autocomplete
+      var options = {
+        autoselect: true,
+        hint: false,
+        minLength: 2,
+      };
+      window.autocomplete(searchEl, options, [{
+        source: function(query, callback) {
+          const searchOptions = {
+            isCaseSensitive: false,
+            shouldSort: true,
+            minMatchCharLength: 2,
+            limit: 10,
+          };
+          var results = fuse.search(query, searchOptions);
+          callback(results
+            .map(function(result) { return result.item; })
+          );
+        },
+        templates: {
+          suggestion: function(suggestion) {
+            var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
+              ? `<img src="${offsetURL(suggestion.preview)}"</img>`
+              : '';
+            var html = `
+              <div class="search-item">
+                <h3>${suggestion.title}</h3>
+                <div class="search-item-description">
+                  ${suggestion.description || ''}
+                </div>
+                <div class="search-item-preview">
+                  ${img}
+                </div>
+              </div>
+            `;
+            return html;
+          }
+        }
+      }]).on('autocomplete:selected', function(event, suggestion) {
+        window.location.href = offsetURL(suggestion.path);
+      });
+      // remove inline display style on autocompleter (we want to
+      // manage responsive display via css)
+      $('.algolia-autocomplete').css("display", "");
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+
+});
+
+</script>
+
+<style type="text/css">
+
+.nav-search {
+  font-size: x-small;
+}
+
+/* Algolioa Autocomplete */
+
+.algolia-autocomplete {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: sub;
+  background-color: white;
+  color: black;
+  padding: 6px;
+  padding-top: 8px;
+  padding-bottom: 0;
+  border-radius: 6px;
+  border: 1px #0F2E3D solid;
+  width: 180px;
+}
+
+
+@media screen and (max-width: 768px) {
+  .distill-site-nav .algolia-autocomplete {
+    display: none;
+    visibility: hidden;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete {
+    display: inline-block;
+    visibility: visible;
+  }
+  .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
+    margin-left: 0;
+    width: 400px;
+    max-height: 400px;
+  }
+}
+
+.algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
+  width: 90%;
+  outline: none;
+  border: none;
+}
+
+.algolia-autocomplete .aa-hint {
+  color: #999;
+}
+.algolia-autocomplete .aa-dropdown-menu {
+  width: 550px;
+  max-height: 70vh;
+  overflow-x: visible;
+  overflow-y: scroll;
+  padding: 5px;
+  margin-top: 3px;
+  margin-left: -150px;
+  background-color: #fff;
+  border-radius: 5px;
+  border: 1px solid #999;
+  border-top: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
+  cursor: pointer;
+  padding: 5px 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
+  border-bottom: none;
+  margin-bottom: 2px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
+  overflow: hidden;
+  font-size: 0.8em;
+  line-height: 1.4em;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
+  font-size: 1rem;
+  margin-block-start: 0;
+  margin-block-end: 5px;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
+  display: inline-block;
+  overflow: hidden;
+  height: 2.8em;
+  width: 80%;
+  margin-right: 4%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
+  display: inline-block;
+  width: 15%;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
+  height: 3em;
+  width: auto;
+  display: none;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
+  display: initial;
+}
+
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
+  background-color: #eee;
+}
+.algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
+  font-weight: bold;
+  font-style: normal;
+}
+
+</style>
+
+
+<!--/radix_placeholder_navigation_in_header-->
+<!--radix_placeholder_site_in_header-->
+<!--/radix_placeholder_site_in_header-->
+
+<style type="text/css">
+body {
+  padding-top: 60px;
+}
+</style>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/jquerylib/lib/3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/js/bootstrap.min.js"></script>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/shim/html5shiv.min.js"></script>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/bootstrap/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/navigation-1.1/tabsets.js"></script>
+<link href="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/highlightjs/default.css" rel="stylesheet" />
+<script src="/Library/Frameworks/R.framework/Versions/4.0/Resources/library/rmarkdown/rmd/h/highlightjs/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+<!--radix_placeholder_navigation_before_body-->
+<header class="header header--fixed" role="banner">
+<nav class="distill-site-nav distill-site-header">
+<div class="nav-left">
+<a href="index.html" class="title">Seungjoon Yoo</a>
+<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
+</div>
+<div class="nav-right">
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
+</div>
+</nav>
+</header>
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Homework 2</h1>
+<h4 class="author">Seungjoon Yoo</h4>
+<h4 class="date">2/4/2022</h4>
+
+</div>
+
+
+<pre class="r"><code># Imports the US Airports Data
+
+ data(&quot;USairports&quot;, package = &quot;igraphdata&quot;)
+  network_igraph &lt;- USairports
+  rm(USairports)</code></pre>
+<pre class="r"><code>  if(&quot;statnet&quot; %in% rownames(installed.packages()) == FALSE) {install.packages(&quot;statnet&quot;)}
+  if(&quot;igraph&quot;  %in% rownames(installed.packages()) == FALSE) {install.packages(&quot;igraph&quot;)}
+  if(&quot;igraphdata&quot; %in% rownames(installed.packages()) == FALSE) {install.packages(&quot;igraphdata&quot;)}
+
+  library(statnet)</code></pre>
+<pre><code>## Loading required package: tergm</code></pre>
+<pre><code>## Loading required package: ergm</code></pre>
+<pre><code>## Loading required package: network</code></pre>
+<pre><code>## 
+## &#39;network&#39; 1.17.1 (2021-06-12), part of the Statnet Project
+## * &#39;news(package=&quot;network&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;network&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>## 
+## &#39;ergm&#39; 4.1.2 (2021-07-26), part of the Statnet Project
+## * &#39;news(package=&quot;ergm&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;ergm&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>## &#39;ergm&#39; 4 is a major update that introduces some backwards-incompatible
+## changes. Please type &#39;news(package=&quot;ergm&quot;)&#39; for a list of major
+## changes.</code></pre>
+<pre><code>## Loading required package: networkDynamic</code></pre>
+<pre><code>## 
+## &#39;networkDynamic&#39; 0.11.0 (2021-06-12), part of the Statnet Project
+## * &#39;news(package=&quot;networkDynamic&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;networkDynamic&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;tergm&#39;:
+##   method                   from
+##   simulate_formula.network ergm</code></pre>
+<pre><code>## 
+## &#39;tergm&#39; 4.0.2 (2021-07-28), part of the Statnet Project
+## * &#39;news(package=&quot;tergm&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;tergm&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>## 
+## Attaching package: &#39;tergm&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ergm&#39;:
+## 
+##     snctrl</code></pre>
+<pre><code>## Loading required package: ergm.count</code></pre>
+<pre><code>## 
+## &#39;ergm.count&#39; 4.0.2 (2021-06-18), part of the Statnet Project
+## * &#39;news(package=&quot;ergm.count&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;ergm.count&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>## Loading required package: sna</code></pre>
+<pre><code>## Loading required package: statnet.common</code></pre>
+<pre><code>## 
+## Attaching package: &#39;statnet.common&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ergm&#39;:
+## 
+##     snctrl</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     attr, order</code></pre>
+<pre><code>## sna: Tools for Social Network Analysis
+## Version 2.6 created on 2020-10-5.
+## copyright (c) 2005, Carter T. Butts, University of California-Irvine
+##  For citation information, type citation(&quot;sna&quot;).
+##  Type help(package=&quot;sna&quot;) to get started.</code></pre>
+<pre><code>## Loading required package: tsna</code></pre>
+<pre><code>## 
+## &#39;statnet&#39; 2019.6 (2019-06-13), part of the Statnet Project
+## * &#39;news(package=&quot;statnet&quot;)&#39; for changes since last version
+## * &#39;citation(&quot;statnet&quot;)&#39; for citation information
+## * &#39;https://statnet.org&#39; for help, support, and other information</code></pre>
+<pre><code>## unable to reach CRAN</code></pre>
+<pre class="r"><code>  library(igraph)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;igraph&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:sna&#39;:
+## 
+##     betweenness, bonpow, closeness, components, degree, dyad.census,
+##     evcent, hierarchy, is.connected, neighborhood, triad.census</code></pre>
+<pre><code>## The following objects are masked from &#39;package:network&#39;:
+## 
+##     %c%, %s%, add.edges, add.vertices, delete.edges, delete.vertices,
+##     get.edge.attribute, get.edges, get.vertex.attribute, is.bipartite,
+##     is.directed, list.edge.attributes, list.vertex.attributes,
+##     set.edge.attribute, set.vertex.attribute</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     decompose, spectrum</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     union</code></pre>
+<pre class="r"><code>  library(igraphdata)</code></pre>
+<pre class="r"><code>#Now let&#39;s make an edgelist versian
+
+    network_edgelist &lt;- as.data.frame(as_edgelist(network_igraph), stringsAsFactors = FALSE)
+  
+  #Lets add edge attributes
+    network_edgelist$Carrier    &lt;- as.character(E(network_igraph)$Carrier)
+    network_edgelist$Departures &lt;- as.character(E(network_igraph)$Departures)
+    network_edgelist$Seats      &lt;- as.character(E(network_igraph)$Seats)
+    network_edgelist$Passengers &lt;- as.character(E(network_igraph)$Passengers)
+    network_edgelist$Aircraft   &lt;- as.character(E(network_igraph)$Aircraft)
+    network_edgelist$Distance   &lt;- as.character(E(network_igraph)$Distance)
+    network_edgelist$weight &lt;- as.character(E(network_igraph)$Passengers)</code></pre>
+<pre class="r"><code>#Now let&#39;s create a node attribute dataframe
+    network_nodes &lt;- data.frame(name = as.character(V(network_igraph)$name), 
+                                City = as.character(V(network_igraph)$City),
+                                Position = as.character(V(network_igraph)$Position),
+                                stringsAsFactors = FALSE)</code></pre>
+<pre class="r"><code>#Lets create an statnet network object from our edgelist
+  network_statnet &lt;- network(as.matrix(network_edgelist[1:2]), matrix.type = &#39;edgelist&#39;, directed = TRUE)
+  
+  network_statnet%e%&#39;Carrier&#39;    &lt;- network_edgelist$Carrier    
+  network_statnet%e%&#39;Departures&#39; &lt;- network_edgelist$Departures 
+  network_statnet%e%&#39;Seats&#39;      &lt;- network_edgelist$Seats      
+  network_statnet%e%&#39;Passangers&#39; &lt;- network_edgelist$Passengers 
+  network_statnet%e%&#39;Aircraft&#39;   &lt;- network_edgelist$Aircraft   
+  network_statnet%e%&#39;Distance&#39;   &lt;- network_edgelist$Distance
+  network_statnet%e%&#39;weight&#39; &lt;- network_edgelist$Passengers 
+  
+  
+  network_statnet%v%&#39;City&#39;       &lt;- as.character(network_nodes$City)
+  network_statnet%v%&#39;Distance&#39;   &lt;- as.character(network_nodes$Distance)</code></pre>
+<pre class="r"><code>#Let&#39;s add a helpful message that will tell  users what this script has done.
+  cat(
+&#39;#################################################################################################
+&quot;US Airport.R&quot; has imported a a network of flights between US airports from the igraphdata
+package.
+
+This is a large, weighted, directed network. Nodes are airports and edges are flights. Edges are
+weighted by total number of passangers. For more information use &quot;?USairports&quot;.
+
+The import script has created four objects that represent the network:
+     -network_edgelist      (a dataframe of an edgelist and edge attributes)
+     -network_nodes         (a dataframe of node attributes)
+     -network_igraph        (an igraph object)
+     -network_statnet       (a network object compatable with statnet packages like sna &amp; ergm)
+
+
+Each object name starts, quite generically, with &quot;network_&quot; and ends with the type of object it 
+is. Note that the names are generic so that they are  compatable with other scripts you will use
+in this course. Feel free to rename the objects for your purposes. 
+################################################################################################&#39;)</code></pre>
+<pre><code>## #################################################################################################
+## &quot;US Airport.R&quot; has imported a a network of flights between US airports from the igraphdata
+## package.
+## 
+## This is a large, weighted, directed network. Nodes are airports and edges are flights. Edges are
+## weighted by total number of passangers. For more information use &quot;?USairports&quot;.
+## 
+## The import script has created four objects that represent the network:
+##      -network_edgelist      (a dataframe of an edgelist and edge attributes)
+##      -network_nodes         (a dataframe of node attributes)
+##      -network_igraph        (an igraph object)
+##      -network_statnet       (a network object compatable with statnet packages like sna &amp; ergm)
+## 
+## 
+## Each object name starts, quite generically, with &quot;network_&quot; and ends with the type of object it 
+## is. Note that the names are generic so that they are  compatable with other scripts you will use
+## in this course. Feel free to rename the objects for your purposes. 
+## ################################################################################################</code></pre>
+<pre class="r"><code>save(network_edgelist, network_igraph, network_nodes, network_statnet, file=&quot;USAirports.rda&quot;)</code></pre>
+<p>#Describing Network Attrributes</p>
+<p>The network has 755 nodes and 8228 edges.</p>
+<pre class="r"><code>ls()</code></pre>
+<pre><code>## [1] &quot;network_edgelist&quot; &quot;network_igraph&quot;   &quot;network_nodes&quot;    &quot;network_statnet&quot;</code></pre>
+<pre class="r"><code>vcount(network_igraph)</code></pre>
+<pre><code>## [1] 755</code></pre>
+<pre class="r"><code>ecount(network_igraph)</code></pre>
+<pre><code>## [1] 23473</code></pre>
+<pre class="r"><code>print(network_statnet)</code></pre>
+<pre><code>##  Network attributes:
+##   vertices = 755 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 8228 
+##     missing edges= 0 
+##     non-missing edges= 8228 
+## 
+##  Vertex attribute names: 
+##     City Distance vertex.names 
+## 
+##  Edge attribute names not shown</code></pre>
+<pre class="r"><code>print(network_igraph)</code></pre>
+<pre><code>## IGRAPH bf6202d DN-- 755 23473 -- US airports
+## + attr: name (g/c), name (v/c), City (v/c), Position (v/c), Carrier
+## | (e/c), Departures (e/n), Seats (e/n), Passengers (e/n), Aircraft
+## | (e/n), Distance (e/n)
+## + edges from bf6202d (vertex names):
+##  [1] BGR-&gt;JFK BGR-&gt;JFK BOS-&gt;EWR ANC-&gt;JFK JFK-&gt;ANC LAS-&gt;LAX MIA-&gt;JFK EWR-&gt;ANC
+##  [9] BJC-&gt;MIA MIA-&gt;BJC TEB-&gt;ANC JFK-&gt;LAX LAX-&gt;JFK LAX-&gt;SFO AEX-&gt;LAS BFI-&gt;SBA
+## [17] ELM-&gt;PIT GEG-&gt;SUN ICT-&gt;PBI LAS-&gt;LAX LAS-&gt;PBI LAS-&gt;SFO LAX-&gt;LAS PBI-&gt;AEX
+## [25] PBI-&gt;ICT PIT-&gt;VCT SFO-&gt;LAX VCT-&gt;DWH IAD-&gt;JFK ABE-&gt;CLT ABE-&gt;HPN AGS-&gt;CLT
+## [33] AGS-&gt;CLT AVL-&gt;CLT AVL-&gt;CLT AVP-&gt;CLT AVP-&gt;PHL BDL-&gt;CLT BHM-&gt;CLT BHM-&gt;CLT
+## [41] BNA-&gt;CLT BNA-&gt;CLT BNA-&gt;DCA BNA-&gt;PHL BTR-&gt;CLT BUF-&gt;CLT BUF-&gt;DCA BUF-&gt;PHL
+## + ... omitted several edges</code></pre>
+<div id="description-of-several-critical-network-features" class="section level1">
+<h1>Description of several critical network features</h1>
+<p>The network is not bipartite. It is a directed and unweighted network.</p>
+<pre class="r"><code>is_bipartite(network_igraph)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>is_directed(network_igraph)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>is_weighted(network_igraph)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>print(network_statnet)</code></pre>
+<pre><code>##  Network attributes:
+##   vertices = 755 
+##   directed = TRUE 
+##   hyper = FALSE 
+##   loops = FALSE 
+##   multiple = FALSE 
+##   bipartite = FALSE 
+##   total edges= 8228 
+##     missing edges= 0 
+##     non-missing edges= 8228 
+## 
+##  Vertex attribute names: 
+##     City Distance vertex.names 
+## 
+##  Edge attribute names not shown</code></pre>
+</div>
+<div id="list-network-attributes-igraph" class="section level1">
+<h1>List network attributes: igraph</h1>
+<pre class="r"><code>igraph::vertex_attr_names(network_igraph)</code></pre>
+<pre><code>## [1] &quot;name&quot;     &quot;City&quot;     &quot;Position&quot;</code></pre>
+<pre class="r"><code>igraph::edge_attr_names(network_igraph)</code></pre>
+<pre><code>## [1] &quot;Carrier&quot;    &quot;Departures&quot; &quot;Seats&quot;      &quot;Passengers&quot; &quot;Aircraft&quot;  
+## [6] &quot;Distance&quot;</code></pre>
+<pre class="r"><code>network::list.vertex.attributes(network_statnet)</code></pre>
+<pre><code>## [1] &quot;City&quot;         &quot;Distance&quot;     &quot;na&quot;           &quot;vertex.names&quot;</code></pre>
+<pre class="r"><code>network::list.edge.attributes(network_statnet)</code></pre>
+<pre><code>## [1] &quot;Aircraft&quot;   &quot;Carrier&quot;    &quot;Departures&quot; &quot;Distance&quot;   &quot;na&quot;        
+## [6] &quot;Passangers&quot; &quot;Seats&quot;      &quot;weight&quot;</code></pre>
+<p>#Summarize network attributes</p>
+<pre class="r"><code>summary(E(network_igraph)$ &quot;Aircraft&quot;)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    10.0   612.0   629.0   571.6   655.0   873.0</code></pre>
+<pre class="r"><code>summary(network_statnet %e% &quot;Passengers&quot;)</code></pre>
+<pre><code>## Length  Class   Mode 
+##      0   NULL   NULL</code></pre>
+<p>#Dyad Census</p>
+<p>There are 10449 (mututal), 2574 (asymmetic) and 271612 (null) dyads in the network.</p>
+<pre class="r"><code>igraph::dyad.census(network_igraph)</code></pre>
+<pre><code>## $mut
+## [1] 10449
+## 
+## $asym
+## [1] 2574
+## 
+## $null
+## [1] 271612</code></pre>
+<pre class="r"><code>sna::dyad.census(network_statnet)</code></pre>
+<pre><code>##       Mut Asym   Null
+## [1,] 3605 1018 280012</code></pre>
+<p>#Triad Census</p>
+<pre class="r"><code>igraph::triad_census(network_igraph)</code></pre>
+<pre><code>##  [1] 68169544   665870  2427052     1445     1289     2465    15322    19171
+##  [9]       91       39   114868      202      376      558     6422    18671</code></pre>
+<pre class="r"><code>sna::triad.census(network_statnet, mode=&quot;graph&quot;)</code></pre>
+<pre><code>##             0       1      2     3
+## [1,] 68527865 2755420 137878 22222</code></pre>
+<p>#Transitivity or Global Clustering</p>
+<p>The transitivity of the network data is around .33.</p>
+<pre class="r"><code>transitivity (network_igraph)</code></pre>
+<pre><code>## [1] 0.3384609</code></pre>
+<pre class="r"><code>gtrans(network_statnet)</code></pre>
+<pre><code>## [1] 0.3266617</code></pre>
+<p>#Local Transitivity and Clustering</p>
+<p>The local clustering (local transitivity) coefficient is .64. Interestingly, the global clustering coefficient (.33) is smaller than the local clustering coefficient.</p>
+<pre class="r"><code>transitivity(network_igraph, type=&quot;average&quot;)</code></pre>
+<pre><code>## [1] 0.6452844</code></pre>
+<p>#Average path length</p>
+<p>The average path length of the network is 3.45.</p>
+<pre class="r"><code>average.path.length(network_igraph, directed=F)</code></pre>
+<pre><code>## [1] 3.447169</code></pre>
+<p>#Component Structure</p>
+<p>There are 6 components in this network data. One component has 745 member in it, meaning that most of the airports have flights between them. The rest of components has a few members in it ranging from 1 to 3. It suggests that those airports in smaller size components are probably not for commercial airlines, but for other purposes such as airforce base etc.</p>
+<p>There seems to be 166 isolates in the data.</p>
+<p>There is one isolate airport that we could identity: DET (Coleman A. Young International Airport).</p>
+<pre class="r"><code>names(igraph::components(network_igraph))</code></pre>
+<pre><code>## [1] &quot;membership&quot; &quot;csize&quot;      &quot;no&quot;</code></pre>
+<pre class="r"><code>igraph::components(network_igraph)$no</code></pre>
+<pre><code>## [1] 6</code></pre>
+<pre class="r"><code>igraph::components(network_igraph)$csize # 2 members or 3 members in the network </code></pre>
+<pre><code>## [1] 745   2   2   3   2   1</code></pre>
+<pre class="r"><code>isolates(network_statnet) # why are there isolates?</code></pre>
+<pre><code>## [1] 166</code></pre>
+<pre class="r"><code>as.vector(network_statnet%v%&#39;vertex.names&#39;)[c(isolates(network_statnet))]</code></pre>
+<pre><code>## [1] &quot;DET&quot;</code></pre>
+</div>
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

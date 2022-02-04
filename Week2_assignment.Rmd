@@ -1,0 +1,196 @@
+
+---
+title: "Week 2 Assignment"
+description: "Network Data Analysis: Data Format, Network Size, Network Structure"
+author:
+  - name: Seungjoon("Joon") Yoo 
+    url: https://yooj0304.github.io/distill-blog/
+    affiliation: University of Massachusetts Amherst
+    affiliation_url: https://polsci.umass.edu/
+date: "2/02/2022"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+  
+ if("statnet" %in% rownames(installed.packages()) == FALSE) {install.packages("statnet")}
+  if("igraph"  %in% rownames(installed.packages()) == FALSE) {install.packages("igraph")}
+  if("igraphdata" %in% rownames(installed.packages()) == FALSE) {install.packages("igraphdata")}
+
+library(statnet)
+  library(igraph)
+  library(igraphdata)
+```
+
+```{r}
+# Imports the US Airports Data
+
+ data("USairports", package = "igraphdata")
+  network_igraph <- USairports
+  rm(USairports)
+```
+
+```{r}
+#Now let's make an edgelist versian
+
+    network_edgelist <- as.data.frame(as_edgelist(network_igraph), stringsAsFactors = FALSE)
+  
+  #Lets add edge attributes
+    network_edgelist$Carrier    <- as.character(E(network_igraph)$Carrier)
+    network_edgelist$Departures <- as.character(E(network_igraph)$Departures)
+    network_edgelist$Seats      <- as.character(E(network_igraph)$Seats)
+    network_edgelist$Passengers <- as.character(E(network_igraph)$Passengers)
+    network_edgelist$Aircraft   <- as.character(E(network_igraph)$Aircraft)
+    network_edgelist$Distance   <- as.character(E(network_igraph)$Distance)
+    network_edgelist$weight <- as.character(E(network_igraph)$Passengers)
+```
+
+```{r}    
+#Now let's create a node attribute dataframe
+    network_nodes <- data.frame(name = as.character(V(network_igraph)$name), 
+                                City = as.character(V(network_igraph)$City),
+                                Position = as.character(V(network_igraph)$Position),
+                                stringsAsFactors = FALSE)
+```
+
+```{r}
+#Lets create an statnet network object from our edgelist
+  network_statnet <- network(as.matrix(network_edgelist[1:2]), matrix.type = 'edgelist', directed = TRUE)
+  
+  network_statnet%e%'Carrier'    <- network_edgelist$Carrier    
+  network_statnet%e%'Departures' <- network_edgelist$Departures 
+  network_statnet%e%'Seats'      <- network_edgelist$Seats      
+  network_statnet%e%'Passangers' <- network_edgelist$Passengers 
+  network_statnet%e%'Aircraft'   <- network_edgelist$Aircraft   
+  network_statnet%e%'Distance'   <- network_edgelist$Distance
+  network_statnet%e%'weight' <- network_edgelist$Passengers 
+  
+  
+  network_statnet%v%'City'       <- as.character(network_nodes$City)
+  network_statnet%v%'Distance'   <- as.character(network_nodes$Distance)
+```  
+
+```{r}  
+#Let's add a helpful message that will tell  users what this script has done.
+  cat(
+'#################################################################################################
+"US Airport.R" has imported a a network of flights between US airports from the igraphdata
+package.
+
+This is a large, weighted, directed network. Nodes are airports and edges are flights. Edges are
+weighted by total number of passangers. For more information use "?USairports".
+
+The import script has created four objects that represent the network:
+     -network_edgelist      (a dataframe of an edgelist and edge attributes)
+     -network_nodes         (a dataframe of node attributes)
+     -network_igraph        (an igraph object)
+     -network_statnet       (a network object compatable with statnet packages like sna & ergm)
+
+
+Each object name starts, quite generically, with "network_" and ends with the type of object it 
+is. Note that the names are generic so that they are  compatable with other scripts you will use
+in this course. Feel free to rename the objects for your purposes. 
+################################################################################################')
+
+save(network_edgelist, network_igraph, network_nodes, network_statnet, file="USAirports.rda")
+```  
+#Describing Network Attrributes
+
+The network has 755 nodes and 8228 edges.
+
+```{r}
+ls()
+vcount(network_igraph)
+ecount(network_igraph)
+print(network_statnet)
+print(network_igraph)
+```
+
+# Description of several critical network features
+
+The network is not bipartite. It is a directed and unweighted network.
+
+```{r}
+is_bipartite(network_igraph)
+is_directed(network_igraph)
+is_weighted(network_igraph)
+print(network_statnet)
+```
+
+# List network attributes: igraph
+
+```{r}
+igraph::vertex_attr_names(network_igraph)
+igraph::edge_attr_names(network_igraph)
+network::list.vertex.attributes(network_statnet)
+network::list.edge.attributes(network_statnet)
+```
+
+#Summarize network attributes
+
+```{r}
+summary(E(network_igraph)$ "Aircraft")
+summary(network_statnet %e% "Passengers")
+```
+
+#Dyad Census
+
+There are 10449 (mututal), 2574 (asymmetic) and 271612 (null) dyads in the network.
+
+```{r}
+igraph::dyad.census(network_igraph)
+sna::dyad.census(network_statnet)
+```
+
+#Triad Census
+
+```{r}
+igraph::triad_census(network_igraph)
+sna::triad.census(network_statnet, mode="graph")
+```
+
+#Transitivity or Global Clustering
+
+The transitivity of the network data is around .33.
+
+```{r}
+transitivity (network_igraph)
+gtrans(network_statnet)
+```
+
+#Local Transitivity and Clustering
+
+The local clustering (local transitivity) coefficient is .64. 
+Interestingly, the global clustering coefficient (.33) is smaller than the local clustering coefficient.
+
+```{r}
+transitivity(network_igraph, type="average")
+```
+
+#Average path length
+
+The average path length of the network is 3.45.
+
+```{r}
+average.path.length(network_igraph, directed=F)
+```
+
+#Component Structure
+
+There are 6 components in this network data. One component has 745 member in it, meaning that most of the airports have flights between them. The rest of components has a few members in it ranging from 1 to 3. It suggests that those airports in smaller size components are probably not for commercial airlines, but for other purposes such as airforce base etc.
+
+There seems to be 166 isolates in the data.
+
+There is one isolate airport that we could identity: DET (Coleman A. Young International Airport).
+
+```{r}
+names(igraph::components(network_igraph))
+igraph::components(network_igraph)$no
+igraph::components(network_igraph)$csize # 2 members or 3 members in the network 
+isolates(network_statnet) # why are there isolates?
+as.vector(network_statnet %v% "vertex.names")[c(isolates(network_statnet))]
+```

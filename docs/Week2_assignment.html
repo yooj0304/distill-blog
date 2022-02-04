@@ -87,26 +87,33 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Seungjoon Yoo</title>
+  <title>Seungjoon Yoo: Week 2 Assignment</title>
+  
+  <meta property="description" itemprop="description" content="Network Data Analysis: Data Format, Network Size, Network Structure"/>
   
   
-  
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-02-02"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-02-02"/>
+  <meta name="article:author" content="Seungjoon(&quot;Joon&quot;) Yoo"/>
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Seungjoon Yoo"/>
+  <meta property="og:title" content="Seungjoon Yoo: Week 2 Assignment"/>
   <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Network Data Analysis: Data Format, Network Size, Network Structure"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Seungjoon Yoo"/>
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Seungjoon Yoo"/>
+  <meta property="twitter:title" content="Seungjoon Yoo: Week 2 Assignment"/>
+  <meta property="twitter:description" content="Network Data Analysis: Data Format, Network Size, Network Structure"/>
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","site","listing"]}},"value":[{"type":"character","attributes":{},"value":["Seungjoon Yoo"]},{"type":"character","attributes":{},"value":["distill::distill_website"]},{"type":"character","attributes":{},"value":["posts"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Week 2 Assignment"]},{"type":"character","attributes":{},"value":["Network Data Analysis: Data Format, Network Size, Network Structure"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Seungjoon(\"Joon\") Yoo"]},{"type":"character","attributes":{},"value":["https://yooj0304.github.io/distill-blog/"]},{"type":"character","attributes":{},"value":["University of Massachusetts Amherst"]},{"type":"character","attributes":{},"value":["https://polsci.umass.edu/"]}]}]},{"type":"character","attributes":{},"value":["2/02/2022"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -2048,12 +2055,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Seungjoon Yoo","authors":[]}
+{"title":"Week 2 Assignment","description":"Network Data Analysis: Data Format, Network Size, Network Structure","authors":[{"author":"Seungjoon(\"Joon\") Yoo","authorURL":"https://yooj0304.github.io/distill-blog/","affiliation":"University of Massachusetts Amherst","affiliationURL":"https://polsci.umass.edu/","orcidID":""}],"publishedDate":"2022-02-02T00:00:00.000-05:00","citationText":"Yoo, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2074,177 +2081,354 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).on("load", function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-apply-limit l-page">
-<div class="posts-list">
-<h1 class="posts-list-caption" data-caption="Seungjoon Yoo">Seungjoon Yoo</h1>
-<a href="posts/welcome/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Feb. 2, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Nora Jones</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>Welcome to Seungjoon Yoo</h2>
-<div class="dt-tags"></div>
-<p>Welcome to our new blog, Seungjoon Yoo. We hope you enjoy 
-reading what we have to say!</p>
-</div>
-</a>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>Seungjoon Yoo</h1>
+<h1>Week 2 Assignment</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-
+<p>Network Data Analysis: Data Format, Network Size, Network Structure</p>
 </div>
 
+<div class="d-byline">
+  Seungjoon(“Joon”) Yoo <a href="https://yooj0304.github.io/distill-blog/" class="uri">https://yooj0304.github.io/distill-blog/</a> (University of Massachusetts Amherst)<a href="https://polsci.umass.edu/" class="uri">https://polsci.umass.edu/</a>
+  
+<br/>2/02/2022
+</div>
 
 <div class="d-article">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"> <span class='kw'>if</span><span class='op'>(</span><span class='st'>"statnet"</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/installed.packages.html'>installed.packages</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"statnet"</span><span class='op'>)</span><span class='op'>}</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='st'>"igraph"</span>  <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/installed.packages.html'>installed.packages</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"igraph"</span><span class='op'>)</span><span class='op'>}</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='st'>"igraphdata"</span> <span class='op'><a href='https://rdrr.io/r/base/match.html'>%in%</a></span> <span class='fu'><a href='https://rdrr.io/r/base/colnames.html'>rownames</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/utils/installed.packages.html'>installed.packages</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>==</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>"igraphdata"</span><span class='op'>)</span><span class='op'>}</span>
+
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://statnet.org'>statnet</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://igraph.org'>igraph</a></span><span class='op'>)</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://igraph.org'>igraphdata</a></span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># Imports the US Airports Data</span>
+
+ <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"USairports"</span>, package <span class='op'>=</span> <span class='st'>"igraphdata"</span><span class='op'>)</span>
+  <span class='va'>network_igraph</span> <span class='op'>&lt;-</span> <span class='va'>USairports</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/rm.html'>rm</a></span><span class='op'>(</span><span class='va'>USairports</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Now let's make an edgelist versian</span>
+
+    <span class='va'>network_edgelist</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/as.data.frame.html'>as.data.frame</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/as_edgelist.html'>as_edgelist</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>, stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+  
+  <span class='co'>#Lets add edge attributes</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Carrier</span>    <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Carrier</span><span class='op'>)</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Departures</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Departures</span><span class='op'>)</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Seats</span>      <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Seats</span><span class='op'>)</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Passengers</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Passengers</span><span class='op'>)</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Aircraft</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Aircraft</span><span class='op'>)</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Distance</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Distance</span><span class='op'>)</span>
+    <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>weight</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Passengers</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Now let's create a node attribute dataframe</span>
+    <span class='va'>network_nodes</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>name <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>name</span><span class='op'>)</span>, 
+                                City <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>City</span><span class='op'>)</span>,
+                                Position <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/V.html'>V</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>Position</span><span class='op'>)</span>,
+                                stringsAsFactors <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Lets create an statnet network object from our edgelist</span>
+  <span class='va'>network_statnet</span> <span class='op'>&lt;-</span> <span class='fu'>network</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>network_edgelist</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span><span class='op'>]</span><span class='op'>)</span>, matrix.type <span class='op'>=</span> <span class='st'>'edgelist'</span>, directed <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+  
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'Carrier'</span>    <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Carrier</span>    
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'Departures'</span> <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Departures</span> 
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'Seats'</span>      <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Seats</span>      
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'Passangers'</span> <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Passengers</span> 
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'Aircraft'</span>   <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Aircraft</span>   
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'Distance'</span>   <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Distance</span>
+  <span class='va'>network_statnet</span><span class='op'>%e%</span><span class='st'>'weight'</span> <span class='op'>&lt;-</span> <span class='va'>network_edgelist</span><span class='op'>$</span><span class='va'>Passengers</span> 
+  
+  
+  <span class='va'>network_statnet</span><span class='op'>%v%</span><span class='st'>'City'</span>       <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>network_nodes</span><span class='op'>$</span><span class='va'>City</span><span class='op'>)</span>
+  <span class='va'>network_statnet</span><span class='op'>%v%</span><span class='st'>'Distance'</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>network_nodes</span><span class='op'>$</span><span class='va'>Distance</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'>#Let's add a helpful message that will tell  users what this script has done.</span>
+  <span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span>
+<span class='st'>[1089 chars quoted with ''']</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>#################################################################################################
+&quot;US Airport.R&quot; has imported a a network of flights between US airports from the igraphdata
+package.
+
+This is a large, weighted, directed network. Nodes are airports and edges are flights. Edges are
+weighted by total number of passangers. For more information use &quot;?USairports&quot;.
+
+The import script has created four objects that represent the network:
+     -network_edgelist      (a dataframe of an edgelist and edge attributes)
+     -network_nodes         (a dataframe of node attributes)
+     -network_igraph        (an igraph object)
+     -network_statnet       (a network object compatable with statnet packages like sna &amp; ergm)
+
+
+Each object name starts, quite generically, with &quot;network_&quot; and ends with the type of object it 
+is. Note that the names are generic so that they are  compatable with other scripts you will use
+in this course. Feel free to rename the objects for your purposes. 
+################################################################################################</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/save.html'>save</a></span><span class='op'>(</span><span class='va'>network_edgelist</span>, <span class='va'>network_igraph</span>, <span class='va'>network_nodes</span>, <span class='va'>network_statnet</span>, file<span class='op'>=</span><span class='st'>"USAirports.rda"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p>#Describing Network Attrributes</p>
+<p>The network has 755 nodes and 8228 edges.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/ls.html'>ls</a></span><span class='op'>(</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;network_edgelist&quot; &quot;network_igraph&quot;   &quot;network_nodes&quot;   
+[4] &quot;network_statnet&quot; </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/gorder.html'>vcount</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 755</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/gsize.html'>ecount</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 23473</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> Network attributes:
+  vertices = 755 
+  directed = TRUE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 8228 
+    missing edges= 0 
+    non-missing edges= 8228 
+
+ Vertex attribute names: 
+    City Distance vertex.names 
+
+ Edge attribute names not shown </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>IGRAPH bf6202d DN-- 755 23473 -- US airports
++ attr: name (g/c), name (v/c), City (v/c), Position (v/c),
+| Carrier (e/c), Departures (e/n), Seats (e/n), Passengers
+| (e/n), Aircraft (e/n), Distance (e/n)
++ edges from bf6202d (vertex names):
+ [1] BGR-&gt;JFK BGR-&gt;JFK BOS-&gt;EWR ANC-&gt;JFK JFK-&gt;ANC LAS-&gt;LAX MIA-&gt;JFK
+ [8] EWR-&gt;ANC BJC-&gt;MIA MIA-&gt;BJC TEB-&gt;ANC JFK-&gt;LAX LAX-&gt;JFK LAX-&gt;SFO
+[15] AEX-&gt;LAS BFI-&gt;SBA ELM-&gt;PIT GEG-&gt;SUN ICT-&gt;PBI LAS-&gt;LAX LAS-&gt;PBI
+[22] LAS-&gt;SFO LAX-&gt;LAS PBI-&gt;AEX PBI-&gt;ICT PIT-&gt;VCT SFO-&gt;LAX VCT-&gt;DWH
+[29] IAD-&gt;JFK ABE-&gt;CLT ABE-&gt;HPN AGS-&gt;CLT AGS-&gt;CLT AVL-&gt;CLT AVL-&gt;CLT
+[36] AVP-&gt;CLT AVP-&gt;PHL BDL-&gt;CLT BHM-&gt;CLT BHM-&gt;CLT BNA-&gt;CLT BNA-&gt;CLT
++ ... omitted several edges</code></pre>
+</div>
+<h1 id="description-of-several-critical-network-features">Description of several critical network features</h1>
+<p>The network is not bipartite. It is a directed and unweighted network.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/make_bipartite_graph.html'>is_bipartite</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/is_directed.html'>is_directed</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] TRUE</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/is_weighted.html'>is_weighted</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] FALSE</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> Network attributes:
+  vertices = 755 
+  directed = TRUE 
+  hyper = FALSE 
+  loops = FALSE 
+  multiple = FALSE 
+  bipartite = FALSE 
+  total edges= 8228 
+    missing edges= 0 
+    non-missing edges= 8228 
+
+ Vertex attribute names: 
+    City Distance vertex.names 
+
+ Edge attribute names not shown </code></pre>
+</div>
+<h1 id="list-network-attributes-igraph">List network attributes: igraph</h1>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/vertex_attr_names.html'>vertex_attr_names</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;name&quot;     &quot;City&quot;     &quot;Position&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/edge_attr_names.html'>edge_attr_names</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;Carrier&quot;    &quot;Departures&quot; &quot;Seats&quot;      &quot;Passengers&quot; &quot;Aircraft&quot;  
+[6] &quot;Distance&quot;  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>network</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/attribute.methods.html'>list.vertex.attributes</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;City&quot;         &quot;Distance&quot;     &quot;na&quot;           &quot;vertex.names&quot;</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>network</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/network/man/attribute.methods.html'>list.edge.attributes</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;Aircraft&quot;   &quot;Carrier&quot;    &quot;Departures&quot; &quot;Distance&quot;   &quot;na&quot;        
+[6] &quot;Passangers&quot; &quot;Seats&quot;      &quot;weight&quot;    </code></pre>
+</div>
+<p>#Summarize network attributes</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/E.html'>E</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span> <span class='st'>"Aircraft"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   10.0   612.0   629.0   571.6   655.0   873.0 </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>network_statnet</span> <span class='op'>%e%</span> <span class='st'>"Passengers"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Length  Class   Mode 
+     0   NULL   NULL </code></pre>
+</div>
+<p>#Dyad Census</p>
+<p>There are 10449 (mututal), 2574 (asymmetic) and 271612 (null) dyads in the network.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/dyad_census.html'>dyad.census</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>$mut
+[1] 10449
+
+$asym
+[1] 2574
+
+$null
+[1] 271612</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>sna</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sna/man/dyad.census.html'>dyad.census</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>      Mut Asym   Null
+[1,] 3605 1018 280012</code></pre>
+</div>
+<p>#Triad Census</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/triad_census.html'>triad_census</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code> [1] 68169544   665870  2427052     1445     1289     2465    15322
+ [8]    19171       91       39   114868      202      376      558
+[15]     6422    18671</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>sna</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/sna/man/triad.census.html'>triad.census</a></span><span class='op'>(</span><span class='va'>network_statnet</span>, mode<span class='op'>=</span><span class='st'>"graph"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>            0       1      2     3
+[1,] 68527865 2755420 137878 22222</code></pre>
+</div>
+<p>#Transitivity or Global Clustering</p>
+<p>The transitivity of the network data is around .33.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/transitivity.html'>transitivity</a></span> <span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.3384609</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/sna/man/gtrans.html'>gtrans</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.3266617</code></pre>
+</div>
+<p>#Local Transitivity and Clustering</p>
+<p>The local clustering (local transitivity) coefficient is .64. Interestingly, the global clustering coefficient (.33) is smaller than the local clustering coefficient.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/transitivity.html'>transitivity</a></span><span class='op'>(</span><span class='va'>network_igraph</span>, type<span class='op'>=</span><span class='st'>"average"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.6452844</code></pre>
+</div>
+<p>#Average path length</p>
+<p>The average path length of the network is 3.45.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/distances.html'>average.path.length</a></span><span class='op'>(</span><span class='va'>network_igraph</span>, directed<span class='op'>=</span><span class='cn'>F</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 3.447169</code></pre>
+</div>
+<p>#Component Structure</p>
+<p>There are 6 components in this network data. One component has 745 member in it, meaning that most of the airports have flights between them. The rest of components has a few members in it ranging from 1 to 3. It suggests that those airports in smaller size components are probably not for commercial airlines, but for other purposes such as airforce base etc.</p>
+<p>There seems to be 166 isolates in the data.</p>
+<p>There is one isolate airport that we could identity: DET (Coleman A. Young International Airport).</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span><span class='op'>(</span><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/components.html'>components</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;membership&quot; &quot;csize&quot;      &quot;no&quot;        </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/components.html'>components</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>no</span>
+</code></pre>
+</div>
+<pre><code>[1] 6</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>igraph</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/igraph/man/components.html'>components</a></span><span class='op'>(</span><span class='va'>network_igraph</span><span class='op'>)</span><span class='op'>$</span><span class='va'>csize</span> <span class='co'># 2 members or 3 members in the network </span>
+</code></pre>
+</div>
+<pre><code>[1] 745   2   2   3   2   1</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/sna/man/isolates.html'>isolates</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span> <span class='co'># why are there isolates?</span>
+</code></pre>
+</div>
+<pre><code>[1] 166</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='va'>network_statnet</span> <span class='op'>%v%</span> <span class='st'>"vertex.names"</span><span class='op'>)</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/pkg/sna/man/isolates.html'>isolates</a></span><span class='op'>(</span><span class='va'>network_statnet</span><span class='op'>)</span><span class='op'>)</span><span class='op'>]</span>
+</code></pre>
+</div>
+<pre><code>[1] &quot;DET&quot;</code></pre>
+</div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
